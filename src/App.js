@@ -55,6 +55,25 @@ class App {
     this.strike = strike;
     this.ball = ball;
   }
+  printResult() {
+    if(this.strike === 0 && this.ball === 0) {
+      MissionUtils.Console.print('낫싱');
+      this.startGame();
+    }else if(this.strike === 0 && this.ball !== 0) {
+      MissionUtils.Console.print(`${this.ball}볼`);
+      this.startGame();
+    }else if(this.strike !== 0 && this.ball === 0) {
+      MissionUtils.Console.print(`${this.strike}스트라이크`);
+      if(this.strike === 3) {
+        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      }else {
+        this.startGame();
+      }
+    }else {
+      MissionUtils.Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
+      this.startGame();
+    }
+  }
 }
 
 module.exports = App;
