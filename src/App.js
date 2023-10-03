@@ -24,6 +24,8 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해 주세요. : ', (input) => {
       this.inputNumbers = input.split('').map(num => parseInt(num));
       this.checkInputException();
+      this.countResult();
+      this.printResult();
     })
   }
   checkInputException() {
