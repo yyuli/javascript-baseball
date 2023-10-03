@@ -30,9 +30,7 @@ class App {
   }
   checkInputException() {
     const duplicateNumber = [];
-    if(this.inputNumbers.length !== 3) {
-      throw new Error('세 자리 수를 입력해 주세요.');
-    }
+    if(this.inputNumbers.length !== 3) throw new Error('세 자리 수를 입력해 주세요.');
     this.inputNumbers.forEach(num => {
       if(isNaN(num) || num === 0) throw new Error('1~9 사이의 숫자를 입력해 주세요.');
       if(!duplicateNumber.includes(num)) {
@@ -46,14 +44,13 @@ class App {
     let strike = 0;
     let ball = 0;
     this.inputNumbers.forEach((inputNum, inputIdx) => {
-      this.randomNumbers.forEach((randomNum, randomIdx) => {
-        if(inputNum === randomNum && inputIdx === randomIdx) {
-          strike++;
-        }else if(inputNum === randomNum && inputIdx !== randomIdx) {
-          ball++;
-        }
-      })
-    })
+      const randomNum = this.randomNumbers[inputIdx];
+      if (inputNum === randomNum) {
+        strike++;
+      } else if (this.randomNumbers.includes(inputNum)) {
+        ball++;
+      }
+    });
     this.strike = strike;
     this.ball = ball;
   }
@@ -80,14 +77,14 @@ class App {
   restart() {
     MissionUtils.Console.readLine(`게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.
 `, (num) => {
-      if(num === "1") {
+      if(num === '1') {
         this.randomNumbers = [];
         this.userInput = [];
         this.strike = 0;
         this.ball = 0;
         this.makeRandomNumbers();
         this.startGame();
-      }else if(num === "2") {
+      }else if(num === '2') {
         MissionUtils.Console.close();
       }
     })
