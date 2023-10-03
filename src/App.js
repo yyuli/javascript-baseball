@@ -4,6 +4,8 @@ class App {
   constructor() {
     this.randomNumbers = [];
     this.inputNumbers = [];
+    this.strike = 0;
+    this.ball = 0;
   }
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
@@ -37,6 +39,21 @@ class App {
         throw new Error('서로 다른 세 자리 수를 입력해 주세요.');
       }
     });
+  }
+  countResult() {
+    let strike = 0;
+    let ball = 0;
+    this.inputNumbers.forEach((inputNum, inputIdx) => {
+      this.randomNumbers.forEach((randomNum, randomIdx) => {
+        if(inputNum === randomNum && inputIdx === randomIdx) {
+          strike++;
+        }else if(inputNum === randomNum && inputIdx !== randomIdx) {
+          ball++;
+        }
+      })
+    })
+    this.strike = strike;
+    this.ball = ball;
   }
 }
 
