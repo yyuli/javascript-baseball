@@ -21,7 +21,22 @@ class App {
   startGame() {
     MissionUtils.Console.readLine('숫자를 입력해 주세요. : ', (input) => {
       this.inputNumbers = input.split('').map(num => parseInt(num));
+      this.checkInputException();
     })
+  }
+  checkInputException() {
+    const duplicateNumber = [];
+    if(this.inputNumbers.length !== 3) {
+      throw new Error('세 자리 수를 입력해 주세요.');
+    }
+    this.inputNumbers.forEach(num => {
+      if(isNaN(num) || num === 0) throw new Error('1~9 사이의 숫자를 입력해 주세요.');
+      if(!duplicateNumber.includes(num)) {
+        duplicateNumber.push(num);
+      }else {
+        throw new Error('서로 다른 세 자리 수를 입력해 주세요.');
+      }
+    });
   }
 }
 
