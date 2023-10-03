@@ -9,10 +9,12 @@ class App {
     this.makeRandomNumbers();
   }
   makeRandomNumbers() {
-    while(this.randomNumbers.length < 3) {
+    const randomNumbers = [];
+    while(randomNumbers.length < 3) {
       const pickNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-      if(!this.randomNumbers.includes(pickNumber)) this.randomNumbers.push(pickNumber);
+      if(!randomNumbers.includes(pickNumber)) randomNumbers.push(pickNumber);
     }
+    this.randomNumbers = randomNumbers;
   }
 }
 
